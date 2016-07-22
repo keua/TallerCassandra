@@ -40,15 +40,15 @@ exec { "descomprimir_cassandra":
 
 file_line { 'hosts':
   path => '/etc/hosts',
-  line => 'node0 5.5.5.0',
+  line => 'caso00 5.5.5.0',
 }
 
 file_line { 'hosts1':
   path => '/etc/hosts',
-  line => 'node0 5.5.5.1',
+  line => 'caso01 5.5.5.1',
 }
 
 file_line { 'host2':
   path => '/etc/hosts',
-  line => 'node0 5.5.5.2',
+  line => 'caso02 5.5.5.2',
 }
