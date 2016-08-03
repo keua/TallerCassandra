@@ -1,0 +1,39 @@
+/**
+  * Keneth Efrén Ubeda Arriaza
+  * Guatemala 3 de agosto de 2016
+  * Datum, Taller Cassandra
+  * Pasos para agregar un nuevo data center a un cluster y que este quede consistente
+  * DSE 5.0, Cassandra 3.0
+  *
+**/
+
+/* Pasos */
+
+1.- Asegurarse que todos los Keyspaces estan usando NetworkTopologyStrategy.
+
+2.- Asegurarse que todos los Keyspaces tienen factor de replicacion 0.
+
+3.- modificar el archivo Cassandra.yaml para cada nodo que se desee agergar al cluster con las configuraciones adecuadas.
+
+      - auto_bootstrap:false
+      - agregar seeds
+      - activar vnodes
+      - endpoint_snitch
+      - las configuraciones deben corresponder a las configuraciones del cluster
+
+4.- Se debe modificar el archivo cassandra-rackdc.properties y agregar
+
+      - Datacenter
+      - rack
+
+5.- si se usa el PropertyFileSnitch se debe configurar el archivo cassandra-topology.properties.
+
+6. si se utiliza el GossipingPropertyFileSnitch se debe eliminar el archivo cassandra-topology.properties.
+
+7.- Iniciar los nuevos nodos.
+
+8.- Despues de que todos los nodos esten corriendo en el cluster se debe cambiar las propiedades del Keyspaces para definir el factor de replicacion incluyendo e nuevo datacenter.
+
+9.- Ejecutar un "nodetool rebuild" indicando el datacenter en cada uno de los nodos del nuevo datacenter.
+
+10.- Cambiar la propiedad auto_bootstrap:true en el archivo cassandra.yaml de los nodos que se agregaron al cluster.

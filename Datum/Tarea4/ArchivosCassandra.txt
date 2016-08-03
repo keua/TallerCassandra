@@ -1,0 +1,43 @@
+/**
+  * Keneth Efrén Ubeda Arriaza
+  * Guatemala 3 de agosto de 2016
+  * Datum, Taller Cassandra
+  * descripción de los archivos creados por cassandra al momento de crear una tabla.
+  * DSE 5.0, Cassandra 3.0
+  *
+**/
+
+/* archivos */
+
+Los archivo se encuentran en /var/lib/cassandra/data  para cada keyspace se crea una carpeta y dentro de la carpeta se crea otra carpeta para cada tabla y dentro estan los archivos.
+Para cada tabla cassandra crea una estructura de 10 archivos que se utiilizan para diferentes tareas y se describiran a continuacion.
+
+1.- Data (Data.db)
+      tiene la data de la sstable como tal.
+
+2.- Primary Index (Index.db)
+      Tiene los indicies de las filas con apuntadores a la posision en los archivos de data.
+
+3.- Bloom filter (Filter.db)
+      es una estructura almacenada en memoria que sirve para verificar que una tabla exista en memoria antes de ir a disco.
+
+4.- Compression Information (CompressionInfo.db)
+      es un archivo que tiene informacion acerca de la data no compresa y otra informacion conserniente a la compresion de la data.
+
+5.- Statistics (Statistics.db)
+      Contiene Metadata estadistica del contenido de la sstable.
+
+6.- Digest (Digest.crc32, Digest.adler32, Digest.sha1)
+      Contien un checksum adler32 del archivo de informacion.
+
+7.- CRC (CRC.db)
+      Contiene un checksum CRC32 para las porciones de un archivo no compreso.
+
+8.- SSTable Index Summary (SUMMARY.db)
+      Contiene una muestra del indice de particion almacenado en memoria.
+
+9.- SSTable Table of Contents (TOC.txt)
+      Este archivo almacena la lista de todos los componentes para el sstables.
+
+10. Secondary Index (SI_.*.db)
+      Es un archivo de indices secundario para, como una extension del Index.db
